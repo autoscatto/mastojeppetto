@@ -8,7 +8,8 @@ import os
 VERSION = "0.0.1"
 
 logging.basicConfig()
-logging.getLogger().setLevel(logging.DEBUG)
+logging.getLogger().setLevel(logging.INFO)
+
 
 PATH = ""
 CONCURRENCY = 4
@@ -26,7 +27,7 @@ def th_downloader(data, path, verbose=False):
         open("{}/{}".format(path, fname), 'wb').write(r.content)
         if verbose:
             logging.info("Downloaded {shortcode} in {fname}".format(shortcode=data.get("shortcode"), fname=fname))
-        return "{}, /emoji/{}".format(data.get("shortcode"), fname)
+        return data.get("shortcode"), fname
     except Exception as e:
         if verbose:
             logging.info("Downloaded {shortcode} failed: [{error}]".format(shortcode=data.get("shortcode"),
@@ -35,7 +36,8 @@ def th_downloader(data, path, verbose=False):
 
 def download_all(url, path=PATH, concurrency=CONCURRENCY, text=TEXT, endpoint=ENDPOINT, verbose=VERBOSE):
     if verbose:
-        logging.getLogger().setLevel(logging.INFO)
+        logging.getLogger().setLevel(logging.DEBUG)
+
 
     try:
         r = requests.get("{base}{apiendpoint}".format(base=url, apiendpoint=endpoint))
@@ -57,7 +59,7 @@ def download_all(url, path=PATH, concurrency=CONCURRENCY, text=TEXT, endpoint=EN
                 logging.info("Download path \"{path}\" not exist, mkdir".format(path=download_path))
                 os.makedirs(download_path)
 
-            logging.info("Starting {concurrecy} concurrent executor".format(concurrency=concurrency))
+            logging.info("Starting {concurrency} concurrent executor".format(concurrency=concurrency))
 
             with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as executor:
                 # Start the load operations and mark each future with its URL
@@ -72,11 +74,14 @@ def download_all(url, path=PATH, concurrency=CONCURRENCY, text=TEXT, endpoint=EN
                     else:
                         oks.append(data)
 
+
             if text:
-                with open("{path}/{textfile}".format(path=download_path, textfile=TEXTFILE)) as textf:
+                with open("{path}/{textfile}".format(path=download_path, textfile=TEXTFILE), "w") as textf:
                     textf.writelines([
                         "{shortcode}, /emoji/{fname}".format(shortcode=shortcode,
-                                                             fname=fname) for shortcode, fname in data])
+                                                             fname=fname) for shortcode, fname in oks])
+
+            logging.info("ENDED! check your emojis in {}".format(download_path))
             return data
 
         except Exception as e:
