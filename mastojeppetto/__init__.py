@@ -5,7 +5,7 @@ import sys
 import concurrent.futures
 from urllib.parse import urlparse
 import os
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 
 logging.basicConfig()
 logging.getLogger().setLevel(logging.INFO)
