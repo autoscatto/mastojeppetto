@@ -7,20 +7,20 @@ Mastodon (and pleroma) python3 emoji downloader
 ## Badges
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/autoscatto) [![Build Status](https://travis-ci.org/autoscatto/mastojeppetto.svg?branch=master)](https://travis-ci.org/autoscatto/mastojeppetto)
 
-######installation
-**from src:**
+### installation
+#### from src:
 ```bash
 git clone https://github.com/autoscatto/mastojeppetto
 cd mastojeppetto
 python setup.py install
 ```
 
-**from pip**:
+#### from pip:
 ```bash
 pip3 install mastojeppetto
 ```
 
-######usage
+### usage
 ```
 mastojeppetto [-h] [--path PATH] [--concurrency CONCURRENCY]
                      [--text TEXT] [--endpoint ENDPOINT] [--verbose]
@@ -39,5 +39,4 @@ optional arguments:
   --endpoint ENDPOINT   custom api emoji endpoint (usually works without
                         changes) [default: "/api/v1/custom_emojis"]
   --verbose             be verbose [default: False]
-
 ```
