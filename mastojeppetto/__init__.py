@@ -78,7 +78,7 @@ def download_all(url, path=PATH, concurrency=CONCURRENCY, text=TEXT, endpoint=EN
             if text:
                 with open("{path}/{textfile}".format(path=download_path, textfile=TEXTFILE), "w") as textf:
                     textf.writelines([
-                        "{shortcode}, /emoji/{fname}".format(shortcode=shortcode,
+                        "{shortcode}, /emoji/{fname}\n".format(shortcode=shortcode,
                                                              fname=fname) for shortcode, fname in oks])
 
             logging.info("ENDED! check your emojis in {}".format(download_path))
