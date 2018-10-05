@@ -115,8 +115,7 @@ def main():
                         default=ENDPOINT)
     parser.add_argument("--verbose",
                         help="be verbose [default: False]",
-                        type=bool,
-                        default=VERBOSE)
+                        action="store_true")
     args = parser.parse_args()
 
     download_all(url=args.url,
