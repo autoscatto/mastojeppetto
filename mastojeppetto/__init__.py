@@ -5,7 +5,7 @@ import sys
 import concurrent.futures
 from urllib.parse import urlparse
 import os
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 
 logging.basicConfig()
 logging.getLogger().setLevel(logging.INFO)
@@ -14,7 +14,7 @@ logging.getLogger().setLevel(logging.INFO)
 PATH = ""
 CONCURRENCY = 4
 TEXT = True
-TEXTFILE = "emoji.txt"
+TEXTFILE = "custom_emoji.txt"
 ENDPOINT = "/api/v1/custom_emojis"
 VERBOSE = False
 
@@ -78,7 +78,7 @@ def download_all(url, path=PATH, concurrency=CONCURRENCY, text=TEXT, endpoint=EN
             if text:
                 with open("{path}/{textfile}".format(path=download_path, textfile=TEXTFILE), "w") as textf:
                     textf.writelines([
-                        "{shortcode}, /emoji/{fname}\n".format(shortcode=shortcode,
+                        "{shortcode}, /emoji/custom/{fname}\n".format(shortcode=shortcode,
                                                              fname=fname) for shortcode, fname in oks])
 
             logging.info("ENDED! check your emojis in {}".format(download_path))
