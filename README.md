@@ -22,21 +22,22 @@ pip3 install mastojeppetto
 
 ### usage
 ```
-mastojeppetto [-h] [--path PATH] [--concurrency CONCURRENCY]
-                     [--text TEXT] [--endpoint ENDPOINT] [--verbose]
-                     url
+mastojeppetto [-h] [-p PATH] [-c CONCURRENCY] [--endpoint ENDPOINT]
+              [-t] [-d] [-v] url
 
 positional arguments:
   url                   Mastodon (or Pleroma) base url
 
 optional arguments:
   -h, --help            show this help message and exit
-  --path PATH           download destination [default: /tmp/${domainname}]
-  --concurrency CONCURRENCY
+  -p PATH, --path PATH  download destination [default: /tmp/${domainname}]
+  -c CONCURRENCY, --concurrency CONCURRENCY
                         how many parallel download processes will start
                         [default: 4]
-  --text TEXT           generate also emoji.txt (for Pleroma) [default: True]
   --endpoint ENDPOINT   custom api emoji endpoint (usually works without
                         changes) [default: "/api/v1/custom_emojis"]
-  --verbose             be verbose [default: False]
+  -t, --text            generate also custom_emoji.txt [default: True]
+  -d, --debug           be verbose [default: False]
+  -v, --version         show program's version number and exit
+
 ```
