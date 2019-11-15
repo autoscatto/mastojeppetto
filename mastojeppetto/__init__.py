@@ -23,7 +23,8 @@ def th_downloader(data, path):
         url = data.get('static_url')
         fname = urlparse(url).path.split('/')[-1]
         r = requests.get(url, allow_redirects=True)
-        open("{}/{}".format(path, fname), 'wb').write(r.content)
+        with open("{}/{}".format(path, fname), 'wb') as w:
+            w.write(r.content)
         logging.info("Downloaded {shortcode} in {fname}".format(shortcode=data.get("shortcode"), fname=fname))
         return data.get("shortcode"), fname
     except Exception as e:
